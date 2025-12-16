@@ -1,0 +1,116 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.0.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <packaging>jar</packaging>
+    <groupId>com.flowable.playground.quicksandbox</groupId>
+    <artifactId>maven-dependency-plugin-ansi-codes-bug</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>maven-dependency-plugin-ansi-codes-bug Maven Webapp</name>
+    <description>reproduction of MDEP-839</description>
+
+    <properties>
+        <project.build.directory>target</project.build.directory>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>17</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+
+        <reports.rootDirectory>${user.dir}/reports</reports.rootDirectory>
+        <maven-dependency-plugin.version>3.9.0</maven-dependency-plugin.version>
+        <!-- Explicitly specified version for compatibility with version 3.0.0 of the
+        maven-project-info-reports-plugin, which is transitively brought by Spring Boot 4.0.0,
+        as recommended on https://github.com/apache/maven-project-info-reports-plugin/issues/320 -->
+        <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>list</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>list</goal>
+                        </goals>
+                        <configuration>
+                            <appendOutput>false</appendOutput>
+                            <outputFile>${project.reporting.outputDirectory}/dependency/maven_dependencies_list.txt
+                            </outputFile>
+                            <outputScope>true</outputScope>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>tree_json</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>tree</goal>
+                        </goals>
+                        <configuration>
+                            <appendOutput>false</appendOutput>
+                            <outputFile>
+                                ${project.reporting.outputDirectory}/dependency/maven_dependencies_tree_json.txt
+                            </outputFile>
+                            <outputType>json</outputType>
+                            <verbose>true</verbose>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin.version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>analyze-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+                <configuration>
+                    <verbose>true</verbose>
+                    <useSubDirectoryPerScope>true</useSubDirectoryPerScope>
+                </configuration>
+            </plugin>
+        </plugins>
+        <outputDirectory>${reports.rootDirectory}/${project.artifactId}</outputDirectory>
+    </reporting>
+</project>

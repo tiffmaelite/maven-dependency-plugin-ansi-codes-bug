@@ -1,0 +1,10 @@
+The following files have been resolved:
+   org.slf4j:slf4j-api:jar:2.0.17:compile[36m -- module org.slf4j[m
+   org.junit.jupiter:junit-jupiter-engine:jar:6.0.1:test[36m -- module org.junit.jupiter.engine[m
+   org.junit.platform:junit-platform-engine:jar:6.0.1:test[36m -- module org.junit.platform.engine[m
+   org.opentest4j:opentest4j:jar:1.3.0:test[36m -- module org.opentest4j[m
+   org.junit.platform:junit-platform-commons:jar:6.0.1:test[36m -- module org.junit.platform.commons[m
+   org.junit.jupiter:junit-jupiter-api:jar:6.0.1:test[36m -- module org.junit.jupiter.api[m
+   org.apiguardian:apiguardian-api:jar:1.1.2:test[36m -- module org.apiguardian.api[m
+   org.jspecify:jspecify:jar:1.0.0:test[36m -- module org.jspecify[m
+
