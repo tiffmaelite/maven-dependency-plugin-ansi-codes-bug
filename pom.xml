@@ -30,6 +30,7 @@
         maven-project-info-reports-plugin, which is transitively brought by Spring Boot 4.0.0,
         as recommended on https://github.com/apache/maven-project-info-reports-plugin/issues/320 -->
         <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+        <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
     </properties>
 
     <dependencies>
@@ -87,6 +88,21 @@
                 <version>${maven-site-plugin.version}</version>
                 <configuration>
                     <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven-clean-plugin.version}</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>reports</directory>
+                            <includes>
+                                <include>**</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
         </plugins>
